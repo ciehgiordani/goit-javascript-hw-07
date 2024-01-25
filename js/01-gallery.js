@@ -22,19 +22,25 @@ function renderGalleryItems(items, galleryElement) {
     listItem.appendChild(image);
     galleryElement.appendChild(listItem);
 
-    document.querySelector('button.image').onclick = () => {
-            basicLightbox.create(image.src).show()
-          }
 console.log(item.original);
 
     listItem.addEventListener("click", function (event) {
       event.preventDefault();
-          
-      showModal(event.target.dataset.original, item.description);
+      
+      //basic lightbox code to check by Gian
+      basicLightbox.create(event.target.dataset.original, item.description).show();
+
+      // showModal(event.target.dataset.original, item.description);
     });
   });
 }
-
+//sample image button by basic lightbox
+document.querySelector('button.image').onclick = () => {
+            basicLightbox.create(`
+		<img width="1400" height="900" src="https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg" alt="Lighthouse Coast Sea">
+	`).show()
+}
+          
 // function setupModal() {
 //   const modal = document.getElementById("imageModal");
 //   const modalImg = document.getElementById("fullImage");
@@ -58,13 +64,6 @@ console.log(item.original);
   };
 // }
 
-  const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("fullImage");
-  const captionText = document.getElementById("caption");
   
-// document.querySelector('button.image').onclick = () => {
-//             basicLightbox.create(`
-// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
-// 	`).show()
-//           }
+
   
