@@ -26,21 +26,15 @@ console.log(item.original);
 
     listItem.addEventListener("click", function (event) {
       event.preventDefault();
-      
-      //basic lightbox code to check by Gian
-      basicLightbox.create(event.target.dataset.original, item.description).show();
-
+      basicLightbox.create(`
+		<img src=${item.original} alt=${item.description}>
+	`).show();
+      // hide this code and use basic lightbox instead
       // showModal(event.target.dataset.original, item.description);
     });
   });
 }
-//sample image button by basic lightbox
-document.querySelector('button.image').onclick = () => {
-            basicLightbox.create(`
-		<img width="1400" height="900" src="https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg" alt="Lighthouse Coast Sea">
-	`).show()
-}
-          
+         
 // function setupModal() {
 //   const modal = document.getElementById("imageModal");
 //   const modalImg = document.getElementById("fullImage");
