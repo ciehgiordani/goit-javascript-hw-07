@@ -1,11 +1,48 @@
-import { galleryItems } from './gallery-items.js';
-// Change code below this line
+import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm"
+import { galleryItems } from "./gallery-items.js";
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".gallery");
+  renderGalleryItems(galleryItems, gallery);
+  // setupModal();
+});
 
-console.log(galleryItems);
-import * as basicLightbox from 'basiclightbox'
+function renderGalleryItems(items, galleryElement) {
+  items.forEach((item) => {
+    const listItem = document.createElement("li");
+    listItem.classList.add("gallery__item");
 
-const instance = basicLightbox.create(`
-    <img src="assets/images/image.png" width="800" height="600">
-`)
+    const image = document.createElement("img");
+    image.src = item.preview;
+    image.alt = item.description;
+    image.dataset.original = item.original; // Store the original image URL
+    image.classList.add("gallery__image");
 
-instance.show()
+    listItem.appendChild(image);
+    galleryElement.appendChild(listItem);
+
+console.log(item.original);
+
+    listItem.addEventListener("click", function (event) {
+      event.preventDefault();
+      const instance = basicLightbox.create (`
+		<img src=${item.original} alt=${item.description}>
+	`).show();
+      window.onkeydown = function (event) {
+    event.preventDefault();
+      if (event.keyCode == 27) {
+        // const modal = document.getElementById("imageModal");
+        //   modal.style.display = "none";
+        console.log("escape")
+        instance.close()
+        console.log(basicLightbox.visible());
+
+      };
+}
+         }); 
+    
+      // hide this code and use basic lightbox instead
+      // showModal(event.target.dataset.original, item.description);
+    
+    
+  });
+} 

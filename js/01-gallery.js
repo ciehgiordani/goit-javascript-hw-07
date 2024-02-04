@@ -26,15 +26,30 @@ console.log(item.original);
 
     listItem.addEventListener("click", function (event) {
       event.preventDefault();
-      basicLightbox.create(`
+      const instance = basicLightbox.create (`
 		<img src=${item.original} alt=${item.description}>
 	`).show();
+      window.onkeydown = function (event) {
+    event.preventDefault();
+      if (event.keyCode == 27) {
+        // const modal = document.getElementById("imageModal");
+        //   modal.style.display = "none";
+        console.log("escape")
+        instance.close()
+        console.log(basicLightbox.visible());
+
+      };
+}
+         }); 
+    
       // hide this code and use basic lightbox instead
       // showModal(event.target.dataset.original, item.description);
-    });
+    
+    
   });
-}
-         
+} 
+
+
 // function setupModal() {
 //   const modal = document.getElementById("imageModal");
 //   const modalImg = document.getElementById("fullImage");
@@ -51,11 +66,11 @@ console.log(item.original);
 //     }
 //   };
 
-  window.showModal = function (src, caption) {
-    modalImg.src = src;
-    captionText.innerHTML = caption;
-    modal.style.display = "block";
-  };
+  // window.showModal = function (src, caption) {
+  //   modalImg.src = src;
+  //   captionText.innerHTML = caption;
+  //   modal.style.display = "block";
+  // };
 // }
 
   
